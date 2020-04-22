@@ -5,11 +5,11 @@ using namespace std;
 
 float mean(int samplesize, float data[samplesize]) {
     float x = 0;
-	for (int n = 0; n < samplesize; n++){
-		x = x + data[n];
-	}
-	x = x / samplesize;
-	return x; 
+    for (int n = 0; n < samplesize; n++){
+        x = x + data[n];
+    }
+    x = x / samplesize;
+    return x; 
 }
 
 class slr {
@@ -48,11 +48,11 @@ class slr {
 
             //Calculate SSR, SSE, R-Squared, residuals
             residuals[samplesize];
-	        for (int n = 0; n < samplesize; n++){
-		        yhat = alpha + (beta * datax[n]);
-		        SSE += pow((yhat - ybar), 2);
-		        SSR += pow((datay[n] - yhat), 2);
-		        residuals[n] = (datay[n] - yhat);
+            for (int n = 0; n < samplesize; n++){
+                yhat = alpha + (beta * datax[n]);
+                SSE += pow((yhat - ybar), 2);
+                SSR += pow((datay[n] - yhat), 2);
+                residuals[n] = (datay[n] - yhat);
                 if (residuals[n] > residualmax){
                     residualmax = residuals[n];
                 }
@@ -73,17 +73,19 @@ class slr {
 };
 
 int main() {
-	cout << "Simple Linear Regression Calculator - George Maier 2020 \n \n";
+    cout << "Simple Linear Regression Calculator - George Maier 2020 \n \n";
 	
-	//Data should be given in the form of arrays of float in the respective variables datax and datay
-	float datax [25] = {3, 2, 4, 5, 3, 6, 2, 6, 5, 5, 4, 7, 8, 9, 10, 10, 7, 9, 12, 14, 16, 13, 12, 14, 16};
-	float datay [25] = {1, 3, 2, 4, 6, 4, 4, 6, 5, 3, 6, 8, 7, 10, 8, 12, 9, 9, 13, 12, 13, 13, 11, 12, 16};
+    //Data should be given in the form of arrays of float in the respective variables
+    float datax [25] = {3, 2, 4, 5, 3, 6, 2, 6, 5, 5, 4, 7, 8, 9, 10, 10, 7, 9, 12, 14, 16, 13, 12, 14, 16};
+    float datay [25] = {1, 3, 2, 4, 6, 4, 4, 6, 5, 3, 6, 8, 7, 10, 8, 12, 9, 9, 13, 12, 13, 13, 11, 12, 16};
 	
-	// Determines sample size from the size of the datax array. 
-	int samplesize = sizeof(datax)/sizeof(*datax);
+    //Determines sample size from the size of the datax array. 
+    int samplesize = sizeof(datax)/sizeof(*datax);
+
+    //Runs regression 
     slr regression (samplesize, datax, datay);
 
-	//Print Results 
+    //Print Results 
     cout << "Data descriptions -----------------------------------------------------------------\n";
     cout << "Sample Size: " << regression.sample << "     X mean: " << regression.xbar << ";      Y mean: " << regression.ybar << "\n";
     cout << "Pearson correlation (r): " << regression.r << "\n\n";
@@ -95,11 +97,10 @@ int main() {
     cout << "Residual Std. Error: " << regression.residualSE << " on " << (regression.sample-2) << " degrees of freedom\n";
     cout << "Mean Residual Dist.: " << regression.residualmean << "\n";
     cout << "Max. Residual:       " << regression.residualmax << "\n";
-	cout << "Min. Residual:       " << regression.residualmin << "\n \n";
+    cout << "Min. Residual:       " << regression.residualmin << "\n \n";
     cout << "Additional Stats  -----------------------------------------------------------------\n";
-	cout << "SSResiduals          " << regression.SSR << "\n";
-	cout << "SSExplained          " << regression.SSE << "\n";
-	cout << "SSTotal              " << regression.SST << "\n\n";
+    cout << "SSResiduals          " << regression.SSR << "\n";
+    cout << "SSExplained          " << regression.SSE << "\n";
+    cout << "SSTotal              " << regression.SST << "\n\n";
 }
-	
 	
