@@ -4,3 +4,4 @@ project(simple_linear_regression)
 set(CMAKE_CXX_STANDARD 17)
 add_executable(simple_linear_regression
         slr.cpp)
+install(TARGETS simple_linear_regression DESTINATION /usr/local/lib)
