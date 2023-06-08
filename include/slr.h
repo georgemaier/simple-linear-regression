@@ -12,7 +12,7 @@ class slr {
 private:
     double WN1 = 0, WN2 = 0, WN3 = 0, WN4 = 0, Sy = 0, Sx = 0;
 
-    std::pair<double, double> mean();
+    void mean();
 
     void calculateRCorrelation();
 
@@ -25,9 +25,8 @@ private:
 public:
     slr(std::vector<std::pair<double, double>> &data);
 
-    double r = 0, rsquared = 0, alpha = 0, beta = 0, x = 0, y = 0;
+    double r = 0, rsquared = 0, alpha = 0, beta = 0;
     double yhat = 0, ybar = 0, xbar = 0;
-    double yMean = 0, xMean = 0;
     double SSR = 0, SSE = 0, SST = 0;
     double residualSE = 0, residualmax = 0, residualmin = 0, residualmean = 0, t = 0;
     double SEBeta = 0;

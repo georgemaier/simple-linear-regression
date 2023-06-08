@@ -5,7 +5,7 @@
 #include "slr.h"
 
 
-slr::slr(std::vector<std::pair<double, double>> &data) : data(data) {}
+slr::slr(std::vector<std::pair<double, double>> &data) : data(data), sampleSize(data.size()) {}
 
 void slr::calculateAlphaAndBeta() {
     Sy = sqrt(WN3 / double(sampleSize - 1));
@@ -42,14 +42,15 @@ void slr::calculateTTestForBeta() {
     t = beta / SEBeta;
 }
 
-std::pair<double, double> slr::mean() {
+void slr::mean() {
     double mean_x = 0.0;
     double mean_y = 0.0;
     for (auto &d: data) {
         mean_x += d.first;
         mean_y += d.second;
     }
-    return {mean_x / double(sampleSize), mean_y / double(sampleSize)};
+    xbar = mean_x / double(sampleSize);
+    ybar = mean_y / double(sampleSize);
 }
 
 void slr::calculateRCorrelation() {
@@ -63,15 +64,7 @@ void slr::calculateRCorrelation() {
 }
 
 void slr::compute() {
-    //This is the main regression function that is called when a new SLR object is created.
-    //Calculate means
-    sampleSize = data.size();
-    auto avg = mean();
-    xMean = avg.first;
-    yMean = avg.second;
-    xbar = xMean;
-    ybar = yMean;
-
+    mean();
     calculateRCorrelation();
     calculateAlphaAndBeta();
     calculateErrors();
